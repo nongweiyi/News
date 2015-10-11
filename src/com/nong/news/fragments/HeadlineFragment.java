@@ -1,5 +1,8 @@
 package com.nong.news.fragments;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.nong.news.R;
@@ -8,10 +11,11 @@ import com.nong.news.adapters.CustomListViewAdapter;
 import com.nong.news.adapters.CustomPagerAdapter;
 import com.nong.news.entities.News;
 import com.nong.news.utils.FragmentUtil;
-import com.nong.news.utils.LogUtil;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,12 +24,14 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextPaint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -49,12 +55,14 @@ public class HeadlineFragment extends Fragment {
 	private ListView listview_newslist;
 	private ProgressBar progressBar;
 	private List<News> newsList;
+	private List<Drawable> imageDrawableList;
 
 	private View view;// 碎片的布局
 	private Handler handler;
 	private String httpUrl = "http://api.huceo.com/apple/";
 	private String httpArg = "key=75fe3d32fd12df7611b52cbebe0ffa5c&num=10";
 	int Headline_REQUESTHTTP_OK = 0x1111;
+	int LOADIMAGE_OK = 0x1111;
 	View viewPagerItems[];
 
 	@Override
@@ -70,10 +78,14 @@ public class HeadlineFragment extends Fragment {
 				super.handleMessage(msg);
 				// 请求数据成功
 				if (Headline_REQUESTHTTP_OK == msg.what) {
-					/*LogUtil.i("nongweiyi", "=========Headline_REQUESTHTTP_OK===========");*/
+					/*
+					 * LogUtil.i("nongweiyi",
+					 * "=========Headline_REQUESTHTTP_OK===========");
+					 */
 					progressBar.setVisibility(View.GONE);
 					newsList = (List<News>) msg.obj;
 					if (newsList != null) {
+
 						setDataToListView();
 						setImageToViewPager();
 						setViewPageChangeListener();
@@ -83,6 +95,7 @@ public class HeadlineFragment extends Fragment {
 						Toast.makeText(getActivity(), "头条==当前数据为空", 0).show();
 					}
 				}
+
 			}
 
 		};
@@ -92,6 +105,10 @@ public class HeadlineFragment extends Fragment {
 		return view;
 	}
 
+	/**
+	 * @Description:ViewPager图片点击事件监听
+	 *
+	 */
 	private void setViewPagerItemsClickListener() {
 		viewPagerItems[0].setOnClickListener(new OnClickListener() {
 
@@ -123,11 +140,12 @@ public class HeadlineFragment extends Fragment {
 		});
 
 	}
-/**
- * @Description:跳转至新闻详细activity并传递url参数
- * 
- * @param i
- */
+
+	/**
+	 * @Description:跳转至新闻详细activity并传递url参数
+	 * 
+	 * @param i
+	 */
 	private void startNewsDetailActivity(int i) {
 		News news = newsList.get(i);
 		Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
@@ -154,7 +172,6 @@ public class HeadlineFragment extends Fragment {
 
 	/**
 	 * 
-	 * @Name:setDataToListView
 	 * @Description:为listview添加数据
 	 */
 	private void setDataToListView() {
@@ -164,11 +181,9 @@ public class HeadlineFragment extends Fragment {
 	}
 
 	/**
-	 * @Name:setImageToViewPager
 	 * @Description:为viewpager加载图片
 	 *
-	 * @param context
-	 *            上下文
+	 * @param context： 上下文    
 	 * @param viewPager
 	 */
 	private void setImageToViewPager() {
@@ -234,7 +249,6 @@ public class HeadlineFragment extends Fragment {
 	}
 
 	/**
-	 * @Name:setPointsColor
 	 * @Description:设置四个点显示的颜色
 	 *
 	 * @param 当前对应点的位置

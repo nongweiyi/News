@@ -80,7 +80,7 @@ public class JsonParser {
 			LogUtil.i("nongweiyi", "==========url===="+url);*/
 			// 如果拿到的图片为空
 			if (TextUtils.isEmpty(picUrl)) {
-				/*LogUtil.i("nongweiyi", "==========picUrl====null");*/
+				LogUtil.i("nongweiyi", "==========picUrl====null");
 				imageDrawable = context.getResources().getDrawable(R.drawable.nullimg);
 			} else {
 				imageDrawable = loadImageFromNetwork(picUrl);

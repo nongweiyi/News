@@ -1,33 +1,23 @@
 package com.nong.news.utils;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
 
 import com.nong.news.R;
-import com.nong.news.adapters.CustomListViewAdapter;
-import com.nong.news.adapters.CustomPagerAdapter;
 import com.nong.news.entities.News;
 import com.nong.news.http.HttpRequestUtil;
 import com.nong.news.http.JsonParser;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.text.TextPaint;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 
 /**
@@ -136,6 +126,31 @@ public class FragmentUtil {
 		}).start();
 
 	}
+	/**
+	 * @param newsList 
+	 * @Description:“Ï≤Ωº”‘ÿÕº∆¨
+	 * 
+	 * @param urladdr
+	 * @return
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
+	/*public static List<Drawable> loadImageFromNetwork(Context context,List<News> newsList) throws MalformedURLException, IOException {
+		List<Drawable> imageDrableList=new ArrayList<Drawable>();
+		News news=new News();
+		Drawable drawable = null;
+		for(int index=0;index<newsList.size();index++){
+			 news=newsList.get(index);
+			 String picUrl=news.getPicUrl();
+			 if(TextUtils.isEmpty(picUrl)){
+				 drawable = context.getResources().getDrawable(R.drawable.nullimg);
+			 }else{
+				 drawable = Drawable.createFromStream(new URL(picUrl).openStream(), "image.jpg");
+			 }
+			 imageDrableList.add(drawable);
+		}
+		return imageDrableList;
+	}*/
 
 	/**
 	 * @Name:initView
