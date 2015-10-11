@@ -36,16 +36,22 @@ public class JsonParser {
 				String title = newsDetailObject.getString("title");
 				String description = newsDetailObject.getString("description");
 				String picUrl = newsDetailObject.getString("picUrl");
+				String url = newsDetailObject.getString("url");
 				Drawable imageDrawable = null;
+				/*LogUtil.i("nongweiyi", "==========hottime===="+hottime);
+				LogUtil.i("nongweiyi", "==========title===="+title);
+				LogUtil.i("nongweiyi", "==========description===="+description);
+				LogUtil.i("nongweiyi", "==========picUrl===="+picUrl);
+				LogUtil.i("nongweiyi", "==========url===="+url);*/
 				// 如果拿到的图片为空
 				if (TextUtils.isEmpty(picUrl)) {
-					LogUtil.i("nongweiyi", "==========picUrl====null");
+					/*LogUtil.i("nongweiyi", "==========picUrl====null");*/
 					imageDrawable = context.getResources().getDrawable(R.drawable.nullimg);
 				} else {
 					imageDrawable = loadImageFromNetwork(picUrl);
 				}
 
-				String url = newsDetailObject.getString("url");
+				
 				News news = new News(title, description, hottime, picUrl, url, imageDrawable);
 				newsList.add(news);
 			}
@@ -67,14 +73,14 @@ public class JsonParser {
 			String url = newsDetailObject.getString("url");
 			Drawable imageDrawable = null;
 		
-			LogUtil.i("nongweiyi", "==========hottime===="+hottime);
+			/*LogUtil.i("nongweiyi", "==========hottime===="+hottime);
 			LogUtil.i("nongweiyi", "==========title===="+title);
 			LogUtil.i("nongweiyi", "==========description===="+description);
 			LogUtil.i("nongweiyi", "==========picUrl===="+picUrl);
-			LogUtil.i("nongweiyi", "==========url===="+url);
+			LogUtil.i("nongweiyi", "==========url===="+url);*/
 			// 如果拿到的图片为空
 			if (TextUtils.isEmpty(picUrl)) {
-				LogUtil.i("nongweiyi", "==========picUrl====null");
+				/*LogUtil.i("nongweiyi", "==========picUrl====null");*/
 				imageDrawable = context.getResources().getDrawable(R.drawable.nullimg);
 			} else {
 				imageDrawable = loadImageFromNetwork(picUrl);
