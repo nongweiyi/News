@@ -59,7 +59,7 @@ public class HeadlineFragment extends Fragment {
 
 	private View view;// ËéÆ¬µÄ²¼¾Ö
 	private Handler handler;
-	private String httpUrl = "http://api.huceo.com/apple/";
+	private String httpUrl = "http://api.huceo.com/wxem/other/";
 	private String httpArg = "key=75fe3d32fd12df7611b52cbebe0ffa5c&num=10";
 	int Headline_REQUESTHTTP_OK = 0x1111;
 	int LOADIMAGE_OK = 0x1111;

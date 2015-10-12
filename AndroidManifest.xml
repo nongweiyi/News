@@ -34,7 +34,7 @@
             android:name="com.nong.news.activities.NewsDetailActivity"
             android:label="@string/title_activity_news_detail"
             android:icon="@drawable/btn_back_detail"
-            android:theme="@android:style/Theme.Holo.Light" >
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
     </application>
 

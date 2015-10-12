@@ -63,42 +63,4 @@ public class NewsDetailActivity extends Activity {
 		webview_news_detail = (WebView) this.findViewById(R.id.webview_news_detail);
 
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.news_detail, menu);
-		getActionBar().setDisplayShowTitleEnabled(false);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		
-		return true;
-	}
-
-	/**
-	 * actionbar上的选项按钮事件监听
-	 */
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-
-		switch (item.getItemId()) {
-		case R.id.action_share:
-			Toast.makeText(this, "分享", 0).show();
-			break;
-		case R.id.action_collect:
-			Toast.makeText(this, "收藏", 0).show();
-			break;
-		case R.id.action_screenCapture:
-			Toast.makeText(this, "态度截屏", 0).show();
-			break;
-		case R.id.action_fontSize:
-			Toast.makeText(this, "正文字号", 0).show();
-			break;
-		case R.id.action_nightMode:
-			Toast.makeText(this, "夜间模式", 0).show();
-			break;
-		default:
-			break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
 }

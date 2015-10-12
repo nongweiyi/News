@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.nong.news.R;
 import com.nong.news.adapters.CustomFragmentPagerAdapter;
-import com.nong.news.customView.SideslipView;
 import com.nong.news.fragments.EntertainmentFragment;
 import com.nong.news.fragments.FantasticFragment;
 import com.nong.news.fragments.HeadlineFragment;
@@ -31,6 +30,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -88,14 +88,17 @@ public class NewsListActivity extends FragmentActivity implements OnClickListene
 	private FragmentManager fragmentManager;
 	private ViewPager viewpager_fragmentviewpager;
 	private int backPressCount = 0;
-	private ListView sideMenu_listview;
+	/* private ListView sideMenu_listview; */
+
+	Button btn_exit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_news_list);
 		initView();
-		setSideMenuDataandListener();
+		/* setSideMenuDataandListener(); */
+		setBtnExitListner();
 		initFragmentViewPager();
 		getFragmentObject();
 		addFragmentToViewPager();
@@ -104,19 +107,15 @@ public class NewsListActivity extends FragmentActivity implements OnClickListene
 	}
 
 	/**
-	 * @Description:为侧滑菜单的listview添加选项数据并设置点击事件监听
+	 * @Description:设置左上角退出按钮事件监听
 	 * 
 	 */
-	private void setSideMenuDataandListener() {
-		List<String> data = getMenuListViewData();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(NewsListActivity.this, R.layout.sidemenu_listview_item,
-				R.id.tv_sidemenu_listview_item, data);
-		sideMenu_listview.setAdapter(adapter);
-		sideMenu_listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-		sideMenu_listview.setOnItemClickListener(new OnItemClickListener() {
+	private void setBtnExitListner() {
+		btn_exit.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			public void onClick(View v) {
+
 				showAskExitDialog();
 			}
 		});
@@ -124,7 +123,7 @@ public class NewsListActivity extends FragmentActivity implements OnClickListene
 	}
 
 	/**
-	 * 显示询问是否退出对话框
+	 * @Description:显示询问是否退出对话框
 	 * 
 	 */
 	private void showAskExitDialog() {
@@ -151,17 +150,6 @@ public class NewsListActivity extends FragmentActivity implements OnClickListene
 		builder.create();
 		builder.show();
 
-	}
-
-	/**
-	 * 获取菜单栏listview选项数据
-	 * 
-	 */
-	private List<String> getMenuListViewData() {
-		List<String> list = new ArrayList<String>();
-
-		list.add("退出");
-		return list;
 	}
 
 	/**
@@ -246,17 +234,14 @@ public class NewsListActivity extends FragmentActivity implements OnClickListene
 	}
 
 	/**
-	 * @Name:initFragmentViewPager
 	 * @Description:初始化FragmentViewPager
-	 *
 	 */
 	private void initFragmentViewPager() {
 		viewpager_fragmentviewpager = (ViewPager) NewsListActivity.this.findViewById(R.id.viewpager_fragmentviewpager);
 	}
 
 	/**
-	 * @Name:initView
-	 * @Description:初始化选项控件
+	 * @Description:初始化控件
 	 */
 	private void initView() {
 		for (int index = 0; index < relativeLayoutArr.length; index++) {
@@ -267,12 +252,8 @@ public class NewsListActivity extends FragmentActivity implements OnClickListene
 			// 设置监听
 			relativeLayoutArr[index].setOnClickListener(this);
 		}
-		/************************* 使用自定义类实现侧滑效果 *************************************/
-		SideslipView sideslipView = (SideslipView) findViewById(R.id.sideslipView);
-		View jokeShow = findViewById(R.id.newsShow);
-		View menu = findViewById(R.id.sideMenu);
-		sideslipView.setSideAndBaseView(jokeShow, menu);
-		sideMenu_listview = (ListView) this.findViewById(R.id.sideMenu_listview);
+
+		btn_exit = (Button) this.findViewById(R.id.btn_exit);
 	}
 
 	/**
@@ -280,8 +261,6 @@ public class NewsListActivity extends FragmentActivity implements OnClickListene
 	 */
 	@Override
 	public void onClick(View v) {
-
-		/****************************************** 选项控件点击事件 ******************************************************/
 		switch (v.getId()) {
 		/* 头条 */
 		case R.id.rl_headline_id:
